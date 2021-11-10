@@ -1,0 +1,20 @@
+class Solution {
+    fun longestCommonPrefix(strs: Array<String>): String {
+        var number = 0
+        var stringToReturn = ""
+        while (number < strs[0].length) {
+            val first = strs[number][number].toString()
+            val second = strs.get(number + 1)[number].toString()
+            if (first == second) {
+                stringToReturn += second
+                number += 1
+            }
+            else number = strs[0].length
+        }
+        return stringToReturn
+    }
+}
+fun main () {
+    val callTheSolution = Solution()
+    println(callTheSolution.longestCommonPrefix(arrayOf("potato", "potata", "pototan")))
+}
