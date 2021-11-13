@@ -1,0 +1,39 @@
+/**
+ * Here we create a mutable list of Char. List is of closing brackets.
+ * Brackets are added to the list as we iterate over the string.
+ * The code checks if the next parenthesis is in the map. Based on the situation it either adds to the list or detracts.
+ * If the final list is empty - we return true. If it is not - false.
+**/
+class Solution {
+    val mapOfParentheses = mapOf('(' to ')', '[' to ']', '{' to '}')
+    fun isValid(s: String): Boolean {
+        val listToAddAndRemoveParentheses = mutableListOf<Char?>()
+        if (s.length % 2 != 0)
+            return false
+        for (element in s) {
+            if (mapOfParentheses[element] != null) {
+                listToAddAndRemoveParentheses += mapOfParentheses[element]
+            }
+            if (mapOfParentheses[element] == null) {
+                //val forTesting = element
+                if (element in mapOfParentheses.values && element !in listToAddAndRemoveParentheses) return false
+                if (listToAddAndRemoveParentheses.isEmpty()) return false
+                if (listToAddAndRemoveParentheses.last() == element)
+                    listToAddAndRemoveParentheses.remove(element)
+                //println("forTesting $forTesting")
+            }
+            //println("the list we're working with $listToAddAndRemoveParentheses")
+            }
+        if (listToAddAndRemoveParentheses.isEmpty()) return true
+        else return false
+        }
+    }
+fun main () {
+    val callTheSolution = Solution()
+//    println(callTheSolution.isValid("[]{}()"))
+//    println(callTheSolution.isValid("([)]"))
+//    println(callTheSolution.isValid("{[]}"))
+//    println(callTheSolution.isValid("){"))
+//    println(callTheSolution.isValid("([}}])"))
+    println(callTheSolution.isValid("[([]])"))
+}
