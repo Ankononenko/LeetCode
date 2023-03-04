@@ -11,16 +11,37 @@ char* convertToTitle(int columnNumber){
     int pow_of_26 = 0, division_res = 0;
     int alphabet_len = 26, ascii_start_i = 64;
 
-    for (int pow_i = num_of_chars - 1; pow_i >= 0; --pow_i) {
-        pow_of_26 = pow(alphabet_len, pow_i);
-        division_res = columnNumber / pow_of_26;
-        if (division_res) {
-            columnNumber -= division_res * pow_of_26;
-        } else {
-            columnNumber -= columnNumber % pow_of_26;
+    if (!(columnNumber % alphabet_len)) {
+        for (int pow_i = num_of_chars - 1; pow_i >= 0; --pow_i) {
+            pow_of_26 = pow(alphabet_len, pow_i);
+            division_res = columnNumber / pow_of_26;
+            if (division_res) {
+                --division_res;
+            }
+            if (pow_i == 0) {
+                excel_title[insert_i] = alphabet_len + ascii_start_i;
+            } else {
+                if (division_res) {
+                    columnNumber -= division_res * pow_of_26;
+                } else {
+                    columnNumber -= columnNumber % pow_of_26;
+                }
+                excel_title[insert_i] = division_res + ascii_start_i;    
+            }
+            insert_i++;
         }
-        excel_title[insert_i] = division_res + ascii_start_i;
-        insert_i++;
+    } else {
+        for (int pow_i = num_of_chars - 1; pow_i >= 0; --pow_i) {
+            pow_of_26 = pow(alphabet_len, pow_i);
+            division_res = columnNumber / pow_of_26;
+            if (division_res) {
+                columnNumber -= division_res * pow_of_26;
+            } else {
+                columnNumber -= columnNumber % pow_of_26;
+            }
+            excel_title[insert_i] = division_res + ascii_start_i;
+            insert_i++;
+        }   
     }
 
     excel_title[insert_i] = '\0';
