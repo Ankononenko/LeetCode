@@ -19,7 +19,7 @@ int string_to_int(char* word) {
     int res = 0;
     char i = 0, pow_of_ten = strlen(word) - 1;
     while (word[i]) {
-        res += (word[i] - 48) * pow(10, pow_of_ten);
+        res += (word[i] - '0') * pow(10, pow_of_ten);
         --pow_of_ten;
         ++i;
     }
@@ -29,7 +29,7 @@ int string_to_int(char* word) {
 char is_at_least_one_char(char* word) {
     char i = 0, is_char = 0;
     while (word[i] && !is_char) {
-        if (word[i] >= 97 && word[i] <= 122) {
+        if (word[i] >= 'a' && word[i] <= 'z') {
             is_char = 1;
         }
         ++i;
